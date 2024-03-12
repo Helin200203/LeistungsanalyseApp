@@ -1,5 +1,5 @@
 import json
-from my_functions import build_person, build_experiment
+from my_classes import Person, Experiment
 
 def main():
     subject_or_supervisor = input("Sind Sie der Tester, der Patient oder handelt es sich hier um beides? (subject/supervisor/beides): ")
@@ -44,7 +44,7 @@ def main():
     print(experiment)
   
     with open("experiment.json", "w") as outfile:
-        json.dump(experiment, outfile, ensure_ascii=False, indent=4)
+        json.dump(experiment.__dict__, outfile, default=lambda o: o.__dict__, indent=4)
 
     print("Die Experiment-Daten wurden in 'experiment.json' gespeichert.")
 
