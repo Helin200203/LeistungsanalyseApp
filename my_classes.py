@@ -17,7 +17,7 @@ def full_name(self):
 
 class Subject(Person):
     def __init__(self, first_name, last_name, birthdate):
-        super().__init__(first_name, last_name, sex, birthdate)
+        super().__init__(first_name, last_name, self, birthdate)
 
 class Examiner(Person):
     def __init__(self, first_name, last_name, birthdate, field_of_study):
