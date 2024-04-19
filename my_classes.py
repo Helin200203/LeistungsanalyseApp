@@ -13,7 +13,7 @@ def age(self):
         return today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
 
 def full_name(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}"c
 
 class Subject(Person):
     def __init__(self, first_name, last_name, birthdate):
