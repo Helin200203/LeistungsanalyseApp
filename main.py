@@ -1,5 +1,5 @@
 import json
-from my_functions import build_person, build_experiment
+import my_classes as mc
 
 # Funktion zur Abfrage von Personendaten
 def ask_for_person_info(role):
@@ -8,7 +8,7 @@ def ask_for_person_info(role):
     last_name = input("Nachname: ")
     sex = input("Geschlecht (male/female): ")
     age = int(input("Alter: "))
-    return build_person(first_name, last_name, sex, age)
+    return mc.Person(first_name, last_name, sex, age)
 
 # Hauptfunktion
 def main():
@@ -21,7 +21,7 @@ def main():
     subject = ask_for_person_info("Versuchsperson")
 
     # Erstellen und Drucken des Experiment-Dictionary
-    experiment = build_experiment(experiment_name, date, supervisor, subject)
+    experiment = mc.Experiment(experiment_name, date, supervisor, subject)
     print("\nExperiment-Details:")
     print(experiment)
 
