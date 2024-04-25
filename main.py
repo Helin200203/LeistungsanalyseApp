@@ -21,13 +21,13 @@ def main():
     subject = ask_for_person_info("Versuchsperson")
 
     # Erstellen und Drucken des Experiment-Dictionary
-    experiment = mc.Experiment(experiment_name, date, supervisor, subject)
+    experiment = mc.Experiment(experiment_name, date, supervisor.__dict__, subject.__dict__)
     print("\nExperiment-Details:")
     print(experiment)
 
     # Speichern der Daten in einer JSON-Datei
     with open("experiment_details.json", "w") as outfile:
-        json.dump(experiment, outfile)
+        json.dump(experiment.__dict__, outfile)
 
 if __name__ == "__main__":
     main()
