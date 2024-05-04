@@ -2,23 +2,40 @@
 
 from datetime import datetime
 import json
+import requests
 
 class Person:
     def __init__(self, first_name, last_name):
         self.first_name = first_name
         self.last_name = last_name
 
-    def save(self, filename):
-        # Speichert die Attribute der Person als JSON-Datei
-        with open(filename, 'w') as file:
-            json.dump(self.__dict__, file)
+    def put(self):
+        url = f"http://127.0.0.1:5000/person/{self.first_name}"
+        data = {
+            "name": self.first_name,
+         }
+        data_json = json.dumps(data)
+        response = requests.put(url, data=data_json)
+        print(response.text)
+
 
 class Subject(Person):
-    def __init__(self, first_name, last_name, birthdate, study_area, sex):
+    def __init__(self, first_name, last_name, birthdate, study_area, sex, email):
         super().__init__(first_name, last_name)
         self.sex = sex
         self.study_area = study_area
-        self._birthdate = birthdate  # Verstecktes Attribut für das Geburtsdatum
+        self._birthdate = birthdate
+        self.email = email
+
+    def update_email(self):
+        url = "http://127.0.0.1:5000/person/"
+        data = {
+            "name": self.first_name,
+            "email": self.email
+        }
+        data_json = json.dumps(data)
+        response = requests.post(url, data=data_json)
+        print(response.text)
 
     def estimate_max_hr(self):
         # Berechnung der maximalen Herzfrequenz basierend auf dem Alter
