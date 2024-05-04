@@ -1,19 +1,32 @@
 import json
-from my_classes import Person, Experiment
-from my_functions import build_person, build_experiment
+from datetime import datetime
+from my_classes import Subject, Examiner, Experiment
 
-def test():
+def datetime_converter(o):
+    if isinstance(o, datetime):
+        return o.isoformat()  # ISO 8601 Format
 
-  
-    supervisor = build_person("Helin", "Hussein", "female", 21, "estimate_max_hr")
-    subject= build_person("Helium", "stickstoff", "male", 41)
-    
-    experiment=build_experiment("Belastungsekg", "12.03.2024", supervisor, subject)
+def main():
+    try:
+        # Erstellen einer Instanz von Subject
+        subject = Subject("Jane", "Smith", "female", "1995-05-05", "jane@example.com")
 
-    with open("experiment_test.json", "w") as outfile:
-        json.dump(experiment.__dict__, outfile, default=lambda o: o.__dict__, indent=4)
+        # Aktualisieren der E-Mail des Subjects
+        subject.update_email("jane.new@example.com")
 
-    print("Test ist abgeschlossen. Daten wurden in 'experiment_test.json' gespeichert.")
+        # Erstellen einer Instanz von Examiner
+        examiner = Examiner("Dr. Alice", "Johnson", "female", "1985-08-15", "Physics")
+
+        # Erstellen einer Instanz von Experiment
+        experiment = Experiment("Experiment 1", "2022-01-01", examiner, subject)
+
+        # Umwandeln des Experiments in ein Dictionary
+        experiment_dict = experiment.to_dict()
+
+        # Ausgabe des Experiment-Dictionarys unter Verwendung des datetime_converters
+        print(json.dumps(experiment_dict, indent=4, default=datetime_converter))
+    except ValueError as e:
+        print(f"Ein Fehler ist aufgetreten: {e}")
 
 if __name__ == "__main__":
-    test()
+    main()
